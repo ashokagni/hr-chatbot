@@ -1,10 +1,10 @@
-# Northstar People Desk
+# Ideas2it People Desk
 
 Proof of concept for an authenticated HR chat agent.
 
 An employee signs in, asks a question, and a [CrewAI](https://docs.crewai.com/) agent answers it. Policy questions are retrieved from a Chroma vector index. Leave balances, eligibility, and day counts come from Postgres through tools. The language model can be a free local Llama, a free Groq-hosted open model, or a paid OpenAI model.
 
-The policies in `policies/` are fictional Northstar Labs documents written for this proof of concept. Replace those markdown files and run `python manage.py index_policies` to point the assistant at another policy set.
+The policies in `policies/` are fictional Ideas2it Labs documents written for this proof of concept. Replace those markdown files and run `python manage.py index_policies` to point the assistant at another policy set.
 
 ## Stack
 
@@ -35,7 +35,7 @@ python manage.py runserver
 
 Open http://127.0.0.1:8000/
 
-Demo password for every account: `Northstar#2026`
+Demo password for every account: `Ideas2it#2026`
 
 | Username | Who |
 | --- | --- |
