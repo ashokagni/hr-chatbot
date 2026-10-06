@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}No employee record{% endblock %}
+{% block body %}
+<main class="login-shell">
+  <section class="login-panel">
+    <h2>No employee record</h2>
+    <p>This login is not linked to an employee profile, so the assistant has no leave record to read.</p>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Sign out</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hr-chat-postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - hr_chat_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hr_chat -d hr_chat"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  # Optional free local Llama. Start with: docker compose --profile llama up -d
+  ollama:
+    profiles: ["llama"]
+    image: ollama/ollama
+    container_name: hr-chat-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - hr_chat_ollama:/root/.ollama
+
+volumes:
+  hr_chat_pg:
+  hr_chat_ollama:

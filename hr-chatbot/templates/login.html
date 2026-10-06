@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Northstar People Desk{% endblock %}
+{% block body %}
+<main class="login-shell">
+  <section class="login-brand">
+    <p class="eyebrow">Northstar Labs · proof of concept</p>
+    <h1>People Desk</h1>
+    <p class="lede">Ask about a published HR policy, your leave balance, or how many days a date range will deduct. The assistant searches the policy library and reads only your employee record.</p>
+  </section>
+  <section class="login-panel">
+    <h2>Employee sign in</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <p class="form-error">{{ form.non_field_errors|striptags }}</p>
+      {% endif %}
+      <label for="id_username">Username</label>
+      {{ form.username }}
+      {% if form.username.errors %}<p class="form-error">{{ form.username.errors|striptags }}</p>{% endif %}
+      <label for="id_password">Password</label>
+      {{ form.password }}
+      {% if form.password.errors %}<p class="form-error">{{ form.password.errors|striptags }}</p>{% endif %}
+      <button type="submit">Continue</button>
+    </form>
+    <div class="demo-accounts">
+      <p>Local demonstration accounts. Password: <code>{{ demo_password }}</code></p>
+      <ul>
+        {% for account in accounts %}
+          <li><strong>{{ account.username }}</strong> · {{ account.name }}, {{ account.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</main>
+{% endblock %}

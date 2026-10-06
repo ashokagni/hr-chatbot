@@ -1,0 +1,5 @@
+Django>=5.1,<6.1
+python-dotenv>=1.0
+psycopg[binary]>=3.2
+crewai[litellm]~=1.15.0
+chromadb~=1.1.0

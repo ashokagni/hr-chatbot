@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Chat · Northstar People Desk{% endblock %}
+{% block body %}
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Northstar People Desk</p>
+    <strong>{{ employee.user.get_full_name }}</strong>
+    <span>{{ employee.job_title }} · {{ employee.location }}</span>
+  </div>
+  <div class="topbar-actions">
+    <span class="mode-badge" id="mode-badge"></span>
+    <button type="button" class="ghost" id="new-chat">New chat</button>
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="ghost">Sign out</button>
+    </form>
+  </div>
+</header>
+<div class="chat-shell">
+  <aside>
+    <p class="employee-code">{{ employee.employee_code }}</p>
+    <p>{{ employee.department }}</p>
+    <p class="quiet">Answers use your Postgres leave record and the policy vector index. Medical details are not collected here.</p>
+    <div class="prompts" id="prompts"></div>
+  </aside>
+  <section class="conversation">
+    <div id="messages" class="messages" aria-live="polite"></div>
+    <form id="composer">
+      <label class="visually-hidden" for="question">Message</label>
+      <textarea id="question" rows="2" maxlength="2000" placeholder="Ask about policy, your balance, or a date range"></textarea>
+      <button type="submit" id="send">Send</button>
+    </form>
+  </section>
+</div>
+{{ boot|json_script:"chat-boot" }}
+<meta name="csrf-token" content="{{ csrf_token }}">
+<script src="{% static 'js/chat.js' %}"></script>
+{% endblock %}
